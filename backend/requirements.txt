@@ -3,7 +3,7 @@ uvicorn
 pydantic
 python-dotenv 
 sqlalchemy 
-psycopg2
+psycopg2-binary
 alembic
 supabase
 httpx
