@@ -1,5 +1,9 @@
 # SolarSync
 
+## Live app
+
+Try SolarSync at [solar-sync-phi.vercel.app](https://solar-sync-phi.vercel.app/).
+
 SolarSync helps a household plan flexible appliance use around rooftop solar. Add a home energy profile and tasks, then preview a schedule that considers solar generation, baseline demand, task time windows, priorities, and the home's load limits.
 
 It produces a suggested schedule; it does not control appliances. The scheduler uses OR-Tools CP-SAT. Solar estimates come from Open-Meteo's forecast API and the home's panel details.
@@ -81,3 +85,7 @@ frontend/
 ## Current scope
 
 SolarSync creates and saves daily schedules, stores reusable task presets, and reports the energy summary returned by the scheduler. Forecast availability depends on Open-Meteo; authentication and saved data depend on the configured Supabase project.
+
+## License
+
+Private project — source code is not licensed for public use.
