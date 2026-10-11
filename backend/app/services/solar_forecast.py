@@ -1,4 +1,5 @@
 from datetime import date, datetime, time, timedelta, timezone
+import logging
 from math import isfinite
 
 import httpx
@@ -18,6 +19,7 @@ AZIMUTH_CONVERSION = {
 
 DEFAULT_SYSTEM_PERFORMANCE_RATIO = 0.8
 OPEN_METEO_FORECAST_URL = "https://api.open-meteo.com/v1/forecast"
+logger = logging.getLogger(__name__)
 
 
 class SolarForecastUnavailable(Exception):
@@ -67,7 +69,18 @@ async def fetch_solar_forecast(home: HomeEnergy, forecast_date: date) -> SolarFo
             datetime.fromisoformat(timestamp): irradiance
             for timestamp, irradiance in zip(times, irradiance_values, strict=True)
         }
-    except (httpx.HTTPError, KeyError, TypeError, ValueError) as exc:
+    except httpx.HTTPStatusError as exc:
+        logger.warning(
+            "Open-Meteo returned HTTP %s: %s",
+            exc.response.status_code,
+            exc.response.text[:500],
+        )
+        raise SolarForecastUnavailable("Could not fetch a valid solar forecast") from exc
+    except httpx.HTTPError as exc:
+        logger.warning("Open-Meteo request failed (%s)", type(exc).__name__)
+        raise SolarForecastUnavailable("Could not fetch a valid solar forecast") from exc
+    except (KeyError, TypeError, ValueError) as exc:
+        logger.warning("Open-Meteo returned invalid forecast data (%s): %s", type(exc).__name__, exc)
         raise SolarForecastUnavailable("Could not fetch a valid solar forecast") from exc
 
     day_start = datetime.combine(forecast_date, time.min)
