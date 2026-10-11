@@ -48,7 +48,7 @@ export default function App() {
           <Route path="tasks" element={<TasksPage />} />
           <Route path="energy" element={<EnergyPage />} />
           <Route path="notifications" element={<NotificationsPage />} />
-        </Route>
+        </Route> 
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </Suspense>
