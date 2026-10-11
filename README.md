@@ -59,6 +59,10 @@ Vite prints the local frontend URL, usually `http://localhost:5173`.
 
 The backend includes a SAM template and Lambda adapter. To build and run the API in SAM's local Lambda environment, install AWS SAM CLI and Docker Desktop, then follow [backend/SAM_LOCAL.md](backend/SAM_LOCAL.md). This local workflow does not deploy AWS resources.
 
+## Public demo deployment
+
+See [DEPLOY.md](DEPLOY.md) for the free Render API and Vercel frontend setup.
+
 ## Project layout
 
 ```text
