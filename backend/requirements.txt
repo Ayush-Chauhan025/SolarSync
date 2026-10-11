@@ -1,0 +1,11 @@
+fastAPI
+uvicorn
+pydantic
+python-dotenv 
+sqlalchemy 
+psycopg2
+alembic
+supabase
+httpx
+ortools
+mangum
