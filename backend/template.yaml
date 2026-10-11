@@ -7,7 +7,7 @@ Globals:
     Runtime: python3.12
     Architectures:
       - x86_64
-    Timeout: 30
+    Timeout: 120
     MemorySize: 2048
 
 Resources:
@@ -16,6 +16,16 @@ Resources:
     Properties:
       CodeUri: .
       Handler: lambda_handler.handler
+      Environment:
+        Variables:
+          SUPABASE_URL: ""
+          SUPABASE_KEY: ""
+          user: ""
+          password: ""
+          host: ""
+          port: ""
+          dbname: ""
+          CORS_ALLOWED_ORIGINS: ""
       Events:
         ApiRoot:
           Type: Api
